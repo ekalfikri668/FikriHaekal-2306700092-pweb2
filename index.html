@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeLab Dex - Public API</title>
+    <link rel="icon" type="image/png"
+        href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png">
+    <!-- Menghubungkan file CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-blur blur-one"></div>
+    <div class="background-blur blur-two"></div>
+
+    <header class="hero">
+        <nav class="navbar">
+            <div class="brand">
+                <div class="brand-icon">⚡</div>
+                <div>
+                    <h2>PokeLab<span>Dex</span></h2>
+                    <p>Interactive Pokémon Scanner</p>
+                </div>
+            </div>
+
+            <div class="api-badge">
+                Public API Project
+            </div>
+        </nav>
+
+        <section class="hero-grid">
+            <div class="hero-text">
+                <p class="eyebrow">Powered by PokeAPI</p>
+                <h1>Explore Pokémon Like a Digital Lab Scanner</h1>
+                <p class="hero-description">
+                    Aplikasi Pokédex interaktif yang menampilkan data Pokémon secara langsung
+                    dari Public API dengan fitur pencarian, filter tipe, dan detail statistik.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#explorer" class="primary-button">Mulai Eksplorasi</a>
+                    <button id="refreshButton" class="secondary-button">Refresh Data</button>
+                </div>
+            </div>
+
+            <div class="scanner-card">
+                <div class="scanner-top">
+                    <span class="scanner-dot"></span>
+                    <span class="scanner-dot"></span>
+                    <span class="scanner-dot"></span>
+                </div>
+
+                <div class="scanner-screen">
+                    <div class="scanner-ring">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                            alt="Pikachu">
+                    </div>
+                    <h3>Pokémon Scanner</h3>
+                    <p>Search • Filter • Detail • Stats</p>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main class="container" id="explorer">
+
+        <section class="stats-panel">
+            <div class="stat-box">
+                <p>Total Loaded</p>
+                <h3 id="totalPokemon">0</h3>
+            </div>
+
+            <div class="stat-box">
+                <p>Current Filter</p>
+                <h3 id="currentFilter">All</h3>
+            </div>
+
+            <div class="stat-box">
+                <p>Data Source</p>
+                <h3>PokeAPI</h3>
+            </div>
+        </section>
+
+        <section class="explorer-header">
+            <div>
+                <p class="section-subtitle">Pokémon Explorer</p>
+                <h2>Daftar Pokémon</h2>
+                <p>
+                    Gunakan pencarian dan filter untuk menemukan Pokémon berdasarkan nama atau tipe.
+                </p>
+            </div>
+        </section>
+
+        <section class="control-panel">
+            <div class="search-wrapper">
+                <span>🔍</span>
+                <input type="text" id="searchInput" placeholder="Cari Pokémon, contoh: pikachu...">
+            </div>
+
+            <select id="typeFilter">
+                <option value="all">Semua Type</option>
+                <option value="normal">Normal</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="grass">Grass</option>
+                <option value="electric">Electric</option>
+                <option value="ice">Ice</option>
+                <option value="fighting">Fighting</option>
+                <option value="poison">Poison</option>
+                <option value="ground">Ground</option>
+                <option value="flying">Flying</option>
+                <option value="psychic">Psychic</option>
+                <option value="bug">Bug</option>
+                <option value="rock">Rock</option>
+                <option value="ghost">Ghost</option>
+                <option value="dragon">Dragon</option>
+                <option value="dark">Dark</option>
+                <option value="steel">Steel</option>
+                <option value="fairy">Fairy</option>
+            </select>
+
+            <button id="randomButton" class="scanner-button">
+                Random Scan
+            </button>
+
+            <button id="compareButton" class="compare-button">
+                Compare Lab
+            </button>
+        </section>
+
+        <section id="messageBox" class="message-box">
+            Memuat data Pokémon dari API...
+        </section>
+
+        <section id="pokemonContainer" class="pokemon-grid">
+            <!-- Data Pokémon dari API akan tampil di sini -->
+        </section>
+        <div class="pagination">
+            <button id="prevButton">Previous</button>
+            <span id="pageInfo">Page 1</span>
+            <button id="nextButton">Next</button>
+        </div>
+
+    </main>
+
+    <section id="detailModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-button">×</button>
+
+            <div id="modalBody">
+                <!-- Detail Pokémon akan tampil di sini -->
+            </div>
+        </div>
+    </section>
+    <section id="compareModal" class="modal">
+        <div class="modal-content compare-modal-content">
+            <button id="closeCompareModal" class="close-button">×</button>
+
+            <div class="compare-header">
+                <p class="section-subtitle">Battle Compare</p>
+                <h2>Pokémon Comparison Lab</h2>
+                <p>
+                    Pilih dua Pokémon untuk membandingkan statistik, tinggi, berat, dan tipe.
+                </p>
+            </div>
+
+            <div class="compare-selectors">
+                <select id="firstPokemonSelect">
+                    <option value="">Pilih Pokémon Pertama</option>
+                </select>
+
+                <select id="secondPokemonSelect">
+                    <option value="">Pilih Pokémon Kedua</option>
+                </select>
+
+                <button id="startCompareButton">
+                    Bandingkan
+                </button>
+            </div>
+
+            <div id="compareResult" class="compare-result">
+                <!-- Hasil perbandingan Pokémon akan tampil di sini -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>
+            Dibuat menggunakan HTML, CSS, JavaScript, dan Public API dari PokeAPI.
+        </p>
+    </footer>
+
+    <!-- Menghubungkan file JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
